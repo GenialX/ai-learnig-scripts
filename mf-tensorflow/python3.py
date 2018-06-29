@@ -1,7 +1,10 @@
+#!/usr/local/bin/python3
+
 # https://morvanzhou.github.io/tutorials/machine-learning/tensorflow/3-2-create-NN/
 # 例子3 建造神经网络
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 # neural layer
 def add_layer(inputs, in_size, out_size, activation_function = None):
@@ -32,8 +35,21 @@ init = tf.initialize_all_variables()
 sess = tf.Session()
 sess.run(init)
 
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+ax.scatter(x_data, y_data)
+plt.ion()
+plt.show()
+
 # train
 for i in range(1000):
     sess.run(train_step, feed_dict={xs:x_data, ys:y_data})
     if i% 50 == 0:
-        print(sess.run(loss, feed_dict={xs:x_data, ys:y_data}))
+        #print(sess.run(loss, feed_dict={xs:x_data, ys:y_data}))
+        try:
+            ax.lines.remove(lines[0])
+        except Exception:
+            pass
+        predition_value = sess.run(predition, feed_dict={xs:x_data})
+        lines = ax.plot(x_data, predition_value, 'r-', lw=5)
+        plt.pause(0.8)
