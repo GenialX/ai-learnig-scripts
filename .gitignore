@@ -1,2 +1,6 @@
 .*
 !.gitignore
+tfgirls/train
+tfgirls/train.tar.gz
+mf-tensorflow/train-classifier-from-scratch/car.csv
+mf-tensorflow/train-classifier-from-scratch/car_onehot.csv
